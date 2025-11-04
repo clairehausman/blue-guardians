@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blue Guardians - Cadastro</title>
+  <link rel="stylesheet" href="./assets/css/register.css"/>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="login-wrapper">
+    <div class="login-box">
+      <div class="image-side">
+        <img src="assets/images/Blue guardians logo.png" alt="Login illustration" />
+      </div>
+      <div class="form-side">
+        <h2>Bem-vindo ao Blue Guardians</h2>
+        <p>Nossa missão é preservar os ecossistemas marinhos por meio da educação, conscientização e ação. Explore, aprenda e faça parte da mudança. </p>
+        <br>
+        <form id="formRegister">
+          <input type="text" placeholder="Email" name="emailUsuario"/>
+          <small class="erro" id="emailDuplicado"></small>
+          <input type="text" class="name" placeholder="Nome" name="nomeUsuario">
+          <!-- <input type="password" placeholder="Tipo" /> -->
+          <select id="type" name="tipoUsuario">
+            <option>Explorador Aprendiz (ou Estudante)</option>
+            <option>Cidadão Consciente (ou Denunciante)</option>
+            <option>Administrador da Plataforma</option>
+          </select>
+          <input type="password" placeholder="Senha" name="senha" />
+          <input type="password" placeholder="Confirme a Senha" name="senhaConfirmacao"/>
+          <small class="erro" id="camposBranco"></small>
+          <small class="erro" id="senhasDiferentes"></small>
+          
+          
+
+          <button type="submit">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script src="assets/js/register.js"></script>

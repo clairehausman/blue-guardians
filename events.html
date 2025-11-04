@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blue Guardians - Eventos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/events.css">
+</head>
+<body>
+  <!-- Menu -->
+  <nav class="navbar">
+    <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+    <div class="navbar-links">
+      <a href="complaints.html">Denúncias</a>
+      <a href="events.html" class="active">Eventos</a>
+      <a href="politics.html">Política de Privacidade</a>
+    </div>
+    <div class="dropdown-user">
+      <i class="fa-solid fa-circle-user"></i>
+      <div class="dropdown-content" id="userDropdown">
+        <!-- Conteúdo será preenchido dinamicamente via JavaScript -->
+      </div>
+    </div>
+  </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="container mt-5 pt-5" style="margin-top: 2rem !important;">
+    <div class="container-organizacao-eventos-custom d-flex flex-wrap gap-3 justify-content-between align-items-center">
+      <!-- Barra de pesquisa -->
+      <div class="navbar-pesquisa">
+        <div class="d-flex gap-3 align-items-center">
+          <input type="text" class="form-control input-pesquisa" placeholder="Buscar eventos..." aria-label="Buscar eventos" />
+          <button class="btn btn-pesquisa" aria-label="Buscar"><i class="fa fa-search"></i></button>
+        </div>
+      </div>    
+      <!-- Botões de ação -->
+      <div class="organizacao-botoes d-flex gap-2">
+        <div class="dropdown">
+         <button class="ordenar-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                    Ordenar por
+                </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" id="ordenar-alfabetica">Ordem Alfabética (A-Z)</a></li>
+            <li><a class="dropdown-item" href="#" id="ordenar-proximos">Próximos Eventos</a></li>
+          </ul>
+        </div>
+        <button type="button" class="bnt-criar-evento" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Organize uma iniciativa</button>
+      </div>
+      <div class="align-items-center">
+        <h6 class="">Filtrar por categoria:</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn-categoria btn btn-outline-primary">Limpeza de Praia</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Educação ambiental</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Caminhada</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Corrida</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Conscientização</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Palestras</button>
+            <button type="button" class="btn-categoria btn btn-outline-primary">Outros</button>
+          </div>
+      </div>
+    </div>
+    
+        <!-- Modal de criação de evento -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color: #026395; color: #FFF;">
+                <h5 class="modal-title" id="staticBackdropLabel">Novo Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="formTitle" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="inputTitle" required />
+                  </div>
+                  <div class="mb-2">
+                    <label for="formTextareaDescricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="textareaDescricao" rows="3" required></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <label for="formDate" class="form-label">Data</label>
+                      <input id="inputDate" class="form-control" type="date" required />
+                    </div>
+                    <div class="col">
+                      <label for="formTime" class="form-label">Horário</label>
+                      <input type="time" id="inputTime" class="form-control" required />
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-sm-4">
+                      <label for="formCep" class="form-label">CEP</label>
+                      <input
+                        id="inputCep"
+                        name="cep"
+                        class="form-control"
+                        required
+                        pattern="^\d{5}-?\d{3}$"
+                        title="Digite um CEP válido com 8 números. Ex: 12345-678"
+                      />
+                      <div id="cepError" class="text-danger d-none mt-1" role="alert"></div>
+                    </div>
+                    <div class="col-sm">
+                      <label for="formCidade" class="form-label">Cidade</label>
+                      <input type="text" class="form-control" id="inputCidade" readonly />
+                    </div>
+                    <div class="col-sm">
+                      <label for="formEstado" class="form-label">Estado</label>
+                      <input type="text" class="form-control" id="inputEstado" readonly />
+                    </div>
+                    <div class="col-sm-8 mt-2">
+                      <label for="formRua" class="form-label">Rua</label>
+                      <input type="text" class="form-control" id="inputRua" readonly />
+                    </div>
+                    <div class="col-sm-8 mt-2">
+                      <label for="formBairro" class="form-label">Bairro</label>
+                      <input type="text" class="form-control" id="inputBairro" readonly />
+                    </div>
+                    <div class="col-sm-3 mt-2">
+                      <label for="formNumero" class="form-label">Número</label>
+                      <input type="number" class="form-control" id="inputNumero" required />
+                    </div>
+                    <div class="mb-2 mt-2">
+                      <label for="formReferencia" class="form-label">Ponto de Referência</label>
+                      <input type="text" class="form-control" id="referencia" />
+                    </div>
+                  </div>
+
+                  <!-- Upload de imagem -->
+                  <div class="mb-3">
+                    <label for="formImg" class="form-label">Imagem</label>
+                    <input type="file" id="img" name="img" accept="image/*" class="form-control" />
+                  </div>
+
+                  <!-- Categorias -->
+                  <!-- <div class="categoria mb-3">
+                      <label for="">Categorias:</label><br>
+                      <button type="button" class="btn-categoria">Pesca Ilegal</button>
+                      <button type="button" class="btn-categoria">Poluição Sonora</button>
+                      <button type="button" class="btn-categoria">Lixo na Praia</button>
+                      <button type="button" class="btn-categoria">Animais Mortos</button>
+                      <button type="button" class="btn-categoria">Veículos na Praia</button>
+                      <button type="button" class="btn-categoria">Outros</button>
+                  </div> -->
+                  <div class="categoria mb-3">
+                    <label class="form-label">Categorias:</label><br />
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Limpeza de Praia</button>
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Educação ambiental</button>
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Caminhada</button>
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Corrida</button>
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Conscientização</button>
+                    <button type="button" class="btn-categoria btn btn-outline-primary me-1 mb-1">Outros</button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn-secundario btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="btnSalvarEvento" type="submit" class="btn-primario btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards Eventos -->
+        <section class="cards">
+            <div class="card-grid">
+                <div class="card">
+                    <img src="assets/images/complains_header.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Poluição por Plástico nas Praias</h3>
+                        <p>Denúncia sobre o crescente acúmulo de resíduos plásticos nas praias, afetando diretamente a vida marinha...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="assets/images/pesca_ilegal.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Pesca Ilegal em Áreas Protegidas</h3>
+                        <p>Relato de práticas de pesca ilegal em áreas protegidas, onde a captura de espécies marinhas ameaçadas é recorrente...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="assets/images/destruicao-corais.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Destruição de Recifes de Coral</h3>
+                        <p>Denúncia sobre a destruição de recifes de corais devido ao turismo irresponsável e práticas de mergulho não...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="assets/images/complains_header.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Poluição por Plástico nas Praias</h3>
+                        <p>Denúncia sobre o crescente acúmulo de resíduos plásticos nas praias, afetando diretamente a vida marinha...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="assets/images/pesca_ilegal.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Pesca Ilegal em Áreas Protegidas</h3>
+                        <p>Relato de práticas de pesca ilegal em áreas protegidas, onde a captura de espécies marinhas ameaçadas é recorrente...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="assets/images/destruicao-corais.jpg" alt="Ecossistemas Marinhos">
+                    <div class="card-content">
+                        <h3>Destruição de Recifes de Coral</h3>
+                        <p>Denúncia sobre a destruição de recifes de corais devido ao turismo irresponsável e práticas de mergulho não...</p>
+                        <!-- <a href="event-detail.html" class="btn">Saber mais</a> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+      <div id="paginacao" class="pagination text-center mt-4"></div>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer mt-5">
+    <div class="footer-container">
+      <div class="footer-logo"><h2>Blue Guardians</h2></div>
+      <div class="footer-links"></div>
+      <div class="footer-social">
+        <a href="#"><img src="assets/images/facebook.png" alt="Facebook" /></a>
+        <a href="#"><img src="assets/images/instagram.png" alt="Instagram" /></a>
+        <a href="#"><img src="assets/images/twitter.png" alt="Twitter" /></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Blue Guardians. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="assets/js/events.js"></script>
+  <!-- Usuário fake para teste -->
+  <!--<script>
+    localStorage.setItem("usuarioLogado", JSON.stringify({ id: 1, nome: "João da Costa" }));
+  </script>-->
+
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const links = document.querySelector(".navbar-links");
+    toggle.addEventListener("click", () => {
+      links.classList.toggle("show");
+    });
+  </script>
+<script>
+    // Função que busca endereço pelo CEP e preenche os campos
+    function inicializarBuscaCep() {
+      const inputCep = document.getElementById("inputCep");
+      const cepError = document.getElementById("cepError");
+      const inputRua = document.getElementById("inputRua");
+      const inputBairro = document.getElementById("inputBairro");
+      const inputCidade = document.getElementById("inputCidade");
+      const inputEstado = document.getElementById("inputEstado");
+
+      if (!inputCep) return;
+
+      // Remove caracteres inválidos enquanto o usuário digita
+      inputCep.addEventListener("input", () => {
+        inputCep.value = inputCep.value.replace(/[^0-9\-]/g, "");
+      });
+
+      inputCep.addEventListener("blur", async () => {
+        let cep = inputCep.value.replace(/\D/g, '');
+
+        if (cep.length !== 8) {
+          cepError.textContent = "Por favor, insira um CEP válido com 8 números.";
+          cepError.classList.remove("d-none");
+          limparCampos();
+          return;
+        }
+
+        cepError.classList.add("d-none");
+
+        try {
+          const endereco = await buscarEnderecoPorCEP(cep);
+
+          inputRua.value = endereco.rua || "";
+          inputBairro.value = endereco.bairro || "";
+          inputCidade.value = endereco.cidade || "";
+          inputEstado.value = endereco.estado || "";
+
+          cepError.classList.add("d-none");
+        } catch (error) {
+          cepError.textContent = "CEP não encontrado.";
+          cepError.classList.remove("d-none");
+          limparCampos();
+        }
+      });
+
+      function limparCampos() {
+        inputRua.value = "";
+        inputBairro.value = "";
+        inputCidade.value = "";
+        inputEstado.value = "";
+      }
+    }
+
+    async function buscarEnderecoPorCEP(cep) {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+      if (!response.ok) {
+        throw new Error("Erro na requisição do CEP");
+      }
+
+      const data = await response.json();
+
+      if (data.erro) {
+        throw new Error("CEP não encontrado");
+      }
+
+      return {
+        rua: data.logradouro,
+        bairro: data.bairro,
+        cidade: data.localidade,
+        estado: data.uf,
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      inicializarBuscaCep();
+    });
+  </script>
+  <script>
+    function checkLoginStatus() {
+      const userDropdown = document.getElementById('userDropdown');
+      const userItem = localStorage.getItem("usuarioLogado");
+      
+      let usuarioLogado = null;
+      
+      if (userItem && userItem !== "undefined") {
+          try {
+          usuarioLogado = JSON.parse(userItem);
+          } catch (e) {
+          console.error("Erro ao analisar JSON:", e);
+          }
+      }
+
+      if (usuarioLogado) {
+          userDropdown.innerHTML = `
+          <a href="profile.html">Meu Perfil</a>
+          <a href="#" id="logoutBtn">Sair</a>
+          `;
+      } else {
+          userDropdown.innerHTML = `
+          <a href="profile.html">Meu Perfil</a>
+          <a href="login.html">Entrar</a>
+          <a href="register.html">Cadastrar-se</a>
+          `;
+      }
+    }
+    function handleLogout() {
+        localStorage.removeItem('usuarioLogado');
+        window.location.href = 'index.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkLoginStatus();
+      
+      document.addEventListener('click', (e) => {
+      if (e.target.id === 'logoutBtn') {
+          e.preventDefault();
+          handleLogout();
+      }
+      });
+    });
+  </script>
+</body>
+</html>

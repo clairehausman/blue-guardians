@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blue Guardians - Login</title>
+  <link rel="stylesheet" href="assets/css/login.css"/>
+
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="login-wrapper">
+    <div class="login-box">
+      <div class="image-side">
+        <img src="assets/images/Blue guardians logo.png" alt="Login illustration" />
+      </div>
+      <div class="form-side">
+        <h2>Bem-vindo de volta</h2>
+        <p>Protegendo os ecossistemas marinhos com informação, conscientização e ação. Junte-se a nós nessa jornada pelo futuro dos oceanos!</p>
+        <br>
+        <form id="formLogin">
+          <input type="email" placeholder="Email" name="emailLogin"/>
+          <small class="erro" id="erroEmail"></small>
+
+          <input type="password" placeholder="Senha" name="senhaLogin" />
+          <small class="erro" id="erroSenha"></small>
+
+          <div class="form-options">
+            <label>
+              <input type="checkbox" /> Lembrar-me
+            </label>
+            <a href="recovery.html">Esqueceu sua senha?</a>
+          </div>
+
+          <button type="submit">Entrar</button>
+
+          <div class="register-link">
+            <span>Não tem uma conta? <a href="register.html">Cadastre-se</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<script src="assets/js/login.js"></script>
